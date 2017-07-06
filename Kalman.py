@@ -2,6 +2,7 @@ import serial
 array = [('45.820201','9.253241'),('45.819408','9.252908'),('45.818556','9.252436')]
 
 s = serial.Serial('/dev/ttyACM0', 9600)
+gpsdata = []
 print("Connected")
 gpscount = 0
 while gpscount<5:
@@ -9,10 +10,11 @@ while gpscount<5:
     splittedLine = line.split(' ')
     print(splittedLine)
     if splittedLine[0]=='GPS:':
+        gpsdata.append((splittedLine[1],splittedLine[2]))
         gpscount+=1
-
+print(gpsdata)
 s.close()
-'''
+
 gpxcontent = '\
 <?xml version="1.0" encoding="UTF-8"?>\n\
 <gpx version="1.0">\n\
@@ -28,4 +30,3 @@ gpxcontent += '\
 text_file = open("Output.gpx", "w")
 text_file.write(gpxcontent)
 text_file.close()
-'''

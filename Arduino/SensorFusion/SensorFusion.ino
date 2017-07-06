@@ -29,7 +29,7 @@ void loop() // run over and over
 {
   bool newdata = false;
   unsigned long start = millis();
-  while (millis() - start < 50) 
+  while (millis() - start < 500) 
   {
     if (serialGPS.available()) 
     
