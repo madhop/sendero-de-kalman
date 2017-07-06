@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.0">
+	<name>Example gpx</name>
+	<trk><name>Example gpx</name><number>1</number><trkseg>
+		<trkpt lat="45.820201" lon="9.253241"><ele>2376</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+		<trkpt lat="45.819408" lon="9.252908"><ele>2375</ele><time>2007-10-14T10:10:52Z</time></trkpt>
+		<trkpt lat="45.818556" lon="9.252436"><ele>2372</ele><time>2007-10-14T10:12:39Z</time></trkpt>
+	</trkseg></trk>
+</gpx>
