@@ -6,6 +6,10 @@
 const int MPU_addr=0x68;  // I2C address of the MPU-6050
 int16_t AcX,AcY,AcZ;
 
+const int buttonPort = 13;
+boolean start = false;
+int lastButtonVal = 0;
+
 SoftwareSerial serialGPS(10,9);
 TinyGPS gps;
 
@@ -23,13 +27,28 @@ void setup()
   Wire.write(0x6B);  // PWR_MGMT_1 register
   Wire.write(0);     // set to zero (wakes up the MPU-6050)
   Wire.endTransmission(true); 
+  pinMode(buttonPort, INPUT);
 }
 
 void loop() // run over and over
 {
+  
+  int buttonVal = digitalRead(buttonPort);
+  if(buttonVal == 1){
+    if(buttonVal != lastButtonVal){
+      if(start){
+        Serial.println("STOP ");
+      }else{
+        Serial.println("START ");
+      }
+      start = !start;
+    }
+  }
+  lastButtonVal = buttonVal;
+  
   bool newdata = false;
   unsigned long start = millis();
-  while (millis() - start < 500) 
+  while (millis() - start < 50) 
   {
     if (serialGPS.available()) 
     
