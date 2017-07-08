@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.0">
-	<name>Example gpx</name>
-	<trk><name>Example gpx</name><number>1</number><trkseg>
-            <trkpt lat="45.81999" lon="9.25344"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
-            <trkpt lat="45.81999" lon="9.25344"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
-            <trkpt lat="45.81999" lon="9.25344"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
-            <trkpt lat="45.81999" lon="9.25344"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
-            <trkpt lat="45.82000" lon="9.25344"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
-	</trkseg></trk>
+    <name>Example gpx</name>
+        <trk>
+            <name>Example gpx</name><number>1</number>
+                <trkseg>
+                    <trkpt lat="45.82041" lon="9.25383"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82041" lon="9.25385"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82041" lon="9.25385"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82041" lon="9.25385"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82041" lon="9.25384"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82041" lon="9.25384"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25385"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25382"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25381"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82041" lon="9.25380"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25379"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25378"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25377"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25376"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25374"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                    <trkpt lat="45.82040" lon="9.25370"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>
+                </trkseg>
+        </trk>
 </gpx>
