@@ -1,5 +1,4 @@
 
-
 #include <SoftwareSerial.h>
 #include <TinyGPS.h>
 #include<Wire.h>
@@ -7,6 +6,7 @@ const int MPU_addr=0x68;  // I2C address of the MPU-6050
 int16_t AcX,AcY,AcZ;
 
 const int buttonPort = 13;
+const int ledPort = 12;
 boolean start = false;
 int lastButtonVal = 0;
 
@@ -28,6 +28,7 @@ void setup()
   Wire.write(0);     // set to zero (wakes up the MPU-6050)
   Wire.endTransmission(true); 
   pinMode(buttonPort, INPUT);
+  pinMode(ledPort, OUTPUT);
 }
 
 void loop() // run over and over
@@ -38,8 +39,10 @@ void loop() // run over and over
     if(buttonVal != lastButtonVal){
       if(start){
         Serial.println("STOP ");
+        digitalWrite(ledPort,0);
       }else{
         Serial.println("START ");
+        digitalWrite(ledPort,1);
       }
       start = !start;
     }
@@ -48,32 +51,26 @@ void loop() // run over and over
   
   bool newdata = false;
   unsigned long start = millis();
-  while (millis() - start < 50) 
-  {
-    if (serialGPS.available()) 
-    
-    {
+  while (millis() - start < 50){
+    if (serialGPS.available()) {
       char c = serialGPS.read();
-      //Serial.print(c);  // uncomment to see raw GPS data
-      if (gps.encode(c)) 
-      {
-        newdata = true;
-        break;  // uncomment to print new data immediately!
+      if (gps.encode(c)) {
+        float flat, flon;
+        unsigned long age, date, cur_time;
+        gps.f_get_position(&flat, &flon, &age);
+        gps.get_datetime(&date, &cur_time, &age);
+        Serial.print("GPS: ");
+        printFloat(flat, 5); 
+        Serial.print(" "); 
+        printFloat(flon, 5);
+        Serial.print(" ");
+        Serial.print(date);
+        Serial.print(" ");
+        Serial.println(cur_time);
       }
     }
   }
   
-  if (newdata) 
-  {
-    float flat, flon;
-    unsigned long age;
-    Serial.print("GPS: ");
-    gps.f_get_position(&flat, &flon, &age);
-    printFloat(flat, 5); 
-    Serial.print(" "); 
-    printFloat(flon, 5);
-    Serial.println(" ");
-  }
   Wire.beginTransmission(MPU_addr);
   Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
   Wire.endTransmission(false);
