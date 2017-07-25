@@ -1,8 +1,10 @@
 import serial
+import time
 s = serial.Serial('/dev/ttyACM0', 9600)
 started = False
 
 def printgpx(gpsdata):
+    date= time.strftime("%c")
     gpxcontent = '<?xml version="1.0" encoding="UTF-8"?>\n\
 <gpx version="1.0">\n\
     <name>Example gpx</name>\n\
@@ -16,7 +18,7 @@ def printgpx(gpsdata):
                 </trkseg>\n\
         </trk>\n\
 </gpx>'
-    text_file = open("Output.gpx", "w")
+    text_file = open(date+".gpx", "w")
     text_file.write(gpxcontent)
     text_file.close()
 
