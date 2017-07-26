@@ -13,7 +13,7 @@ def printgpx(gpsdata):
                 <trkseg>\n'
     for point in gpsdata:
         gpxcontent += '\
-                    <trkpt lat="'+point[0]+'" lon="'+point[1]+'"><ele>0</ele><time>2007-10-14T10:09:57Z</time></trkpt>\n'
+                    <trkpt lat="'+point[0]+'" lon="'+point[1]+'"><ele>0</ele><time>'+point[2]+' '+point[3]+'</time></trkpt>\n'
     gpxcontent += '\
                 </trkseg>\n\
         </trk>\n\
@@ -32,16 +32,18 @@ try:
         if splittedLine[0]=="START":
             started = True
             firstStart = False
+            s.write("START_OK \n".encode())
         while started:
             line = s.readline().decode('utf8')
             splittedLine = line.split(' ')
             print(splittedLine)
             if splittedLine[0]=='GPS:':
-                gpsdata.append((splittedLine[1],splittedLine[2]))
+                gpsdata.append((splittedLine[1],splittedLine[2],splittedLine[3],splittedLine[4]))
             elif splittedLine[0]=="STOP":
                 started = False
                 print(gpsdata)
+                #s.write("WRITING \n".encode())
                 printgpx(gpsdata)
-
+                s.write("STOP_OK \n".encode())
 except KeyboardInterrupt:
     s.close()

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.0">
-    <name>Example gpx</name>
-        <trk>
-            <name>Example gpx</name><number>1</number>
-                <trkseg>
-                </trkseg>
-        </trk>
-</gpx>
