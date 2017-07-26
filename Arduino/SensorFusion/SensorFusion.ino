@@ -39,15 +39,25 @@ void loop() // run over and over
     if(buttonVal != lastButtonVal){
       if(start){
         Serial.println("STOP ");
-        digitalWrite(ledPort,0);
       }else{
         Serial.println("START ");
-        digitalWrite(ledPort,1);
       }
       start = !start;
     }
   }
   lastButtonVal = buttonVal;
+  if(Serial.available()>0){
+    Serial.print("Received: ");
+    String response = getValue(Serial.readString(),' ',0);
+    Serial.println(response);
+    if(response == "START_OK"){
+      digitalWrite(ledPort,1);
+    }
+    else if(response == "STOP_OK"){
+      digitalWrite(ledPort,0);
+    }
+  }
+  
   
   bool newdata = false;
   unsigned long start = millis();
@@ -58,15 +68,16 @@ void loop() // run over and over
         float flat, flon;
         unsigned long age, date, cur_time;
         gps.f_get_position(&flat, &flon, &age);
-        gps.get_datetime(&date, &cur_time, &age);
+        //gps.get_datetime(&date, &cur_time, &age); per tempo dato da gps
         Serial.print("GPS: ");
         printFloat(flat, 5); 
         Serial.print(" "); 
         printFloat(flon, 5);
         Serial.print(" ");
-        Serial.print(date);
+        /*Serial.print(date);
         Serial.print(" ");
-        Serial.println(cur_time);
+        Serial.println(cur_time);*/  //per tempo dato da gps
+        Serial.println(millis());
       }
     }
   }
@@ -84,7 +95,8 @@ void loop() // run over and over
   Serial.print(AcY);
   Serial.print(" ");
   Serial.print(AcZ);
-  Serial.println(" ");
+  Serial.print(" ");
+  Serial.println(millis());
 
 }
 
@@ -122,4 +134,21 @@ void printFloat(double number, int digits)
     Serial.print(toPrint);
     remainder -= toPrint;
   }
+}
+
+String getValue(String data, char separator, int index)
+{
+  int found = 0;
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length()-1;
+
+  for(int i=0; i<=maxIndex && found<=index; i++){
+    if(data.charAt(i)==separator || i==maxIndex){
+        found++;
+        strIndex[0] = strIndex[1]+1;
+        strIndex[1] = (i == maxIndex) ? i+1 : i;
+    }
+  }
+
+  return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
